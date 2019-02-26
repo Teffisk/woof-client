@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Maps from "./Maps";
 
 class Home extends Component {
   render() {
-    return(
-        <p>This is a home page. You should probably write something here.</p>
-      );
+    return (
+      <div>
+        <p>Map should load below:</p>
+        <Maps />
+      </div>
+    );
   }
 }
 

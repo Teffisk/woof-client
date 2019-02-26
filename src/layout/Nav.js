@@ -1,43 +1,43 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../logo.svg';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Nav extends Component {
-  handleLogout = (e) => {
+  handleLogout = e => {
     e.preventDefault();
-    // TODO: REMOVE LS TOKEN; UPDATE PARENT STATE
-  }
+    // REMOVE LS TOKEN; UPDATE PARENT STATE
+    localStorage.removeItem("serverToken");
+    this.props.updateUser();
+  };
 
   render() {
-    let links = '';
-    if(this.props.user){
+    let links = "";
+    if (this.props.user) {
       links = (
-          <span>
-            <a onClick={this.handleLogout}>Logout</a>
-            <Link to="/profile">Profile</Link>
-          </span>
-        );
-    }
-    else {
-      links = (
-          <span>
-            <Link to="/login">Log In</Link>
-            <Link to="/signup">Sign Up</Link>
-          </span>
-        );
-    }
-    return(
-        <div>
-          <nav className="nav">
-            <Link to="/">Home</Link>
-            {links}
-          </nav>
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-        </div>
+        <span>
+          <Link to="/people">People</Link>
+          <Link to="/dogs">Dogs</Link>
+          <Link to="/places">Places</Link>
+          <Link to="/profile">Profile</Link>
+          <a onClick={this.handleLogout}>Logout</a>
+        </span>
       );
+    } else {
+      links = (
+        <span>
+          <Link to="/login">Log in</Link>
+          <Link to="/signup">Sign up</Link>
+        </span>
+      );
+    }
+    return (
+      <div className="anotherWholeGrid">
+        <div className="navBackground" />
+        <nav className="nav">
+          <Link to="/">Home</Link>
+          {links}
+        </nav>
+      </div>
+    );
   }
 }
 
