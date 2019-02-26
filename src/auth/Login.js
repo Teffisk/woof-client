@@ -33,7 +33,7 @@ class Login extends Component {
         this.props.updateUser();
       })
       .catch(err => {
-        console.log("ERROR", err.response.data);
+        console.log("ERROR", err);
       });
   };
 

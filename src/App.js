@@ -4,10 +4,13 @@ import axios from "axios";
 import SERVER_URL from "./constants/server";
 import "./App.css";
 import Footer from "./layout/Footer";
-import Home from "./Home";
-import Login from "./auth/Login";
 import Nav from "./layout/Nav";
-import Profile from "./Profile";
+import Home from "./Components/Home";
+import People from "./Components/People";
+import Dogs from "./Components/Dogs";
+import Places from "./Components/Places";
+import Profile from "./Components/Profile";
+import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 
 class App extends Component {
@@ -34,9 +37,11 @@ class App extends Component {
         })
         .then(response => {
           console.log("SUCCESS", response);
+
           this.setState({
             user: response.data.user
           });
+          console.log("USER:", this.state.user);
         })
         .catch(err => {
           console.log("ERROR", err);
@@ -59,23 +64,42 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <div className="container">
-            <Nav user={this.state.user} />
-            <Route exact path="/" component={Home} />
-            <Route
-              path="/login"
-              component={() => (
-                <Login user={this.state.user} updateUser={this.getUser} />
-              )}
-            />
-            <Route
-              path="/signup"
-              component={() => <Signup user={this.state.user} />}
-            />
-            <Route
-              path="/profile"
-              component={() => <Profile user={this.state.user} />}
-            />
+          <div>
+            <header className="App-header">
+              <nav>
+                <Nav user={this.state.user} updateUser={this.getUser} />
+              </nav>
+            </header>
+            <div className="content">
+              <Route
+                exact
+                path="/"
+                component={() => <Home user={this.state.user} />}
+              />
+              <Route
+                path="/people"
+                component={() => <People user={this.state.user} />}
+              />
+              <Route
+                path="/places"
+                component={() => <Places user={this.state.user} />}
+              />
+              <Route
+                path="/dogs"
+                component={() => <Dogs user={this.state.user} />}
+              />
+              <Route
+                path="/profile"
+                component={() => <Profile user={this.state.user} />}
+              />
+              <Route
+                path="/login"
+                component={() => (
+                  <Login user={this.state.user} updateUser={this.getUser} />
+                )}
+              />
+              <Route path="/signup" component={() => <Signup />} />
+            </div>
           </div>
         </Router>
         <Footer />
