@@ -11,7 +11,8 @@ class Maps extends Component {
     this.state = {
       lng: this.props.lng,
       lat: this.props.lat,
-      zoom: this.props.zoom
+      zoom: this.props.zoom,
+      map: {}
     };
   }
 
@@ -23,6 +24,10 @@ class Maps extends Component {
       style: "mapbox://styles/mapbox/streets-v9",
       center: [lng, lat],
       zoom
+    });
+
+    this.setState({
+      map: map
     });
 
     map.on("move", () => {
@@ -42,8 +47,6 @@ class Maps extends Component {
       });
     });
   };
-
-  componentDidUpdate = () => {};
 
   render() {
     return (

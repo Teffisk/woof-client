@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Maps from "./Maps";
 import yelp from "yelp-fusion";
+import SERVER_URL from "../constants/server";
 
-const client = yelp.client(process.env.YELP_API_KEY);
-const SERVER_URL = "http://localhost:8000";
 class Places extends Component {
   constructor() {
     super();
@@ -17,11 +16,6 @@ class Places extends Component {
 
   componentDidMount = () => {
     console.log("Places did mount");
-    this.setState({
-      lng: -122.3321,
-      lat: 47.6352,
-      zoom: 9.7
-    });
   };
 
   onChangeLocation = e => {
@@ -55,6 +49,7 @@ class Places extends Component {
     return (
       <div className="map">
         <Maps
+          fly={this.flyToLocation}
           lng={this.state.lng}
           lat={this.state.lat}
           zoom={this.state.zoom}
