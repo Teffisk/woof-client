@@ -1,60 +1,74 @@
 import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
-import ReactMapboxGl from "react-mapbox-gl";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGVmZmlzayIsImEiOiJjanFta3hiZ2EwYmx1M3dubzdwenJzcHM5In0.2OK5yrhkJMVUtceL4O7y5g";
 
+var myMap;
+
 class Maps extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      lng: this.props.lng,
-      lat: this.props.lat,
-      zoom: this.props.zoom,
-      map: {}
+      screenWidth: window.innerWidth,
+      newLocation: []
     };
   }
 
-  componentDidMount = () => {
-    const { lng, lat, zoom } = this.state;
-
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: "mapbox://styles/mapbox/streets-v9",
-      center: [lng, lat],
-      zoom
-    });
-
+  handleResize = () => {
     this.setState({
-      map: map
-    });
-
-    map.on("move", () => {
-      const { lng, lat } = map.getCenter();
-      // Change the cursor to a pointer when the mouse is over the places layer.
-      map.on("mouseenter", "points", function() {
-        map.getCanvas().style.cursor = "pointer";
-      });
-      // Change it back to a pointer when it leaves.
-      map.on("mouseleave", "points", function() {
-        map.getCanvas().style.cursor = "";
-      });
-      this.setState({
-        lng: lng.toFixed(4),
-        lat: lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
-      });
+      screenWidth: window.innerWidth
     });
   };
 
+  componentDidMount() {
+    this.handleResize();
+    window.addEventListener("resize", this.handleResize);
+    myMap = new mapboxgl.Map({
+      container: this.mapContainer,
+      style: "mapbox://styles/mapbox/streets-v9",
+      center: [this.props.lng, this.props.lat],
+      zoom: this.props.zoom
+    });
+    // setTimeout(function() {
+    //   myMap.flyTo({
+    //     center: [
+    //       -74.5 + (Math.random() - 0.5) * 10,
+    //       40 + (Math.random() - 0.5) * 10
+    //     ]
+    //   });
+    // }, 1000);
+    myMap.resize();
+  }
+
+  componentDidUpdate = () => {
+    if (this.props.location.coordinates) {
+      myMap.flyTo({
+        center: [
+          this.props.location.coordinates.longitude,
+          this.props.location.coordinates.latitude
+        ],
+        zoom: 15
+      });
+    }
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+    myMap.remove();
+  }
+
   render() {
+    const style = {
+      position: "relative",
+      bottom: 0,
+      width: "100%",
+      height: this.state.screenWidth > 900 ? "100vh" : "40vh"
+    };
+
     return (
       <div>
-        <div
-          ref={el => (this.mapContainer = el)}
-          className="absolute top right left bottom"
-        />
+        <div style={style} ref={el => (this.mapContainer = el)} />;
       </div>
     );
   }

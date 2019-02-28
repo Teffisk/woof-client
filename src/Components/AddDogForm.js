@@ -9,6 +9,7 @@ class AddDogForm extends Component {
       breed: "",
       gender: "",
       birthday: "",
+      image: "",
       userId: props.user.id,
       bio: ""
     };
@@ -17,6 +18,7 @@ class AddDogForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.createNewDog();
+    this.props.handleFormState();
   };
 
   storeInput = e => {
@@ -48,7 +50,7 @@ class AddDogForm extends Component {
     return (
       <div>
         <p>Enter Your Dog's Detail Below:</p>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="new-dog-form">
           <div>
             <label htmlFor="name">Name</label>
             <input type="text" name="name" onChange={this.storeInput} />
@@ -76,6 +78,10 @@ class AddDogForm extends Component {
               <option value="male">M</option>
               <option value="female">F</option>
             </select>
+          </div>
+          <div>
+            <label htmlFor="image">Upload an image</label>
+            <input type="text" name="image" onChange={this.storeInput} />
           </div>
           <div>
             <label htmlFor="bio">Tell people about your pup!</label>

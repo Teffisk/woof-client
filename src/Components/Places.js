@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Maps from "./Maps";
-import yelp from "yelp-fusion";
 import SERVER_URL from "../constants/server";
+import mapboxgl from "mapbox-gl";
+import LocationSearchForm from "./LocationSearchForm";
+import LocationInfo from "./LocationInfo";
 
 class Places extends Component {
   constructor() {
@@ -10,63 +12,47 @@ class Places extends Component {
       lng: -122.3321,
       lat: 47.6352,
       zoom: 9.7,
-      searchLocation: ""
+      location: {}
     };
   }
 
-  componentDidMount = () => {
-    console.log("Places did mount");
+  grabLocation = yelpObj => {
+    this.setState({ location: yelpObj });
   };
 
-  onChangeLocation = e => {
-    this.setState({ searchLocation: e.target.value });
-    console.log("Places state:", this.state.searchLocation);
-  };
-
-  getSearchedLocation = () => {
-    console.log("Hitting getSearchedLocation fetch call");
-    fetch(SERVER_URL + "/places/search/" + this.state.searchLocation)
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        this.setState({
-          searchLocation: json,
-          lng: json.coordinates.longitude,
-          lat: json.coordinates.latitude,
-          zoom: 16
-        });
-      });
-  };
-
-  handleOnSubmit = e => {
-    console.log("Hitting handleOnSubmit!");
-    e.preventDefault();
-    this.getSearchedLocation();
+  handleZoom = zoom => {
+    this.setState({
+      zoom: zoom
+    });
   };
 
   render() {
     return (
-      <div className="map">
-        <Maps
-          fly={this.flyToLocation}
-          lng={this.state.lng}
-          lat={this.state.lat}
-          zoom={this.state.zoom}
-        />
-        <div className="location-form-container">
-          <form
-            className="location-form  z-depth-5"
-            onSubmit={this.handleOnSubmit}
-          >
-            <label htmlFor="searchLocation">Location</label>
-            <input
-              type="text"
-              name="searchLocation"
-              onChange={this.onChangeLocation}
-            />
-            <input type="submit" value="search" />
-          </form>
+      <div className="dash-view">
+        <div id="desktop" className="info-container">
+          <LocationInfo
+            location={this.state.location}
+            handleOnSubmit={this.handleOnSubmit}
+            searchLocation={this.state.searchLocation}
+            grabLocation={this.grabLocation}
+          />
+        </div>
+        <div className="map-container">
+          <Maps
+            lat={this.state.lat}
+            lng={this.state.lng}
+            zoom={this.state.zoom}
+            location={this.state.location}
+            handleZoom={this.handleZoom}
+          />
+        </div>
+        <div id="mobile" className="info-container">
+          <LocationInfo
+            location={this.state.location}
+            handleOnSubmit={this.handleOnSubmit}
+            searchLocation={this.state.searchLocation}
+            grabLocation={this.grabLocation}
+          />
         </div>
       </div>
     );

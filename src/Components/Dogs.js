@@ -7,31 +7,62 @@ class Dogs extends Component {
   constructor() {
     super();
     this.state = {
-      dogs: []
+      dogs: [],
+      showForm: false
     };
   }
 
+  componentDidMount = () => {
+    this.getDogs();
+  };
+
   getDogs = () => {
     console.log("Hitting getDogs fetch call");
-    fetch(SERVER_URL + "/dogs/" + this.state.dogs)
-      .then(response => {
-        return response.json();
+    if (this.props.user) {
+      fetch(SERVER_URL + "/dogs/" + this.props.user.id, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json" // let the server know what's coming
+        }
       })
-      .then(json => {
-        this.setState({
-          dogs: json
+        .then(response => response.json())
+        .then(json => {
+          console.log(json);
+          this.setState({ dogs: json });
+        })
+        .catch(err => {
+          console.log("Error posting data!", err);
         });
-      });
+    }
+  };
+
+  handleFormState = () => {
+    let newFormState = !this.state.showForm;
+    console.log("NewFormState:", newFormState);
+    this.setState({ showForm: newFormState });
   };
 
   render() {
-    const ShowDogs = this.state.dogs.length ? (
-      <DogList user={this.props.user} dogs={this.state.dogs} />
-    ) : (
-      <AddDogForm user={this.props.user} dogs={this.state.dogs} />
-    );
     if (this.props.user) {
-      return <div>{ShowDogs}</div>;
+      const ShowDogs = this.state.showForm ? (
+        <AddDogForm
+          user={this.props.user}
+          dogs={this.state.dogs}
+          showForm={this.state.showForm}
+          handleFormState={this.handleFormState}
+        />
+      ) : (
+        <DogList user={this.props.user} dogs={this.state.dogs} />
+      );
+
+      return (
+        <div>
+          {ShowDogs}
+          <button onClick={this.handleFormState} className="showAddDogForm">
+            Add A Dog!
+          </button>
+        </div>
+      );
     } else {
       return (
         <div>

@@ -16,9 +16,7 @@ class Nav extends Component {
       links = (
         <span>
           <Link to="/">Home</Link>
-          <Link to="/people">People</Link>
-          <Link to="/dogs">Dogs</Link>
-          <Link to="/places">Places</Link>
+          <Link to="/places">Find Places</Link>
           <Link to="/profile">Profile</Link>
           <a onClick={this.handleLogout}>Logout</a>
         </span>

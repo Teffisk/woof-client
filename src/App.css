@@ -31,21 +31,18 @@ nav a:hover {
 }
 
 /* DEFAULT STYLES */
-.App {
-  text-align: center;
-}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
 
-.App-header {
+/* .App-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
-}
+} */
 
 .App-title {
   font-size: 1.5em;
@@ -68,29 +65,58 @@ nav a:hover {
   width: 100px;
 }
 
-.map {
-  display: block;
-  position: fixed;
-  width: 50%;
-  height: 100%;
+.dog-profile-pic {
+  max-width: 200px;
+}
+
+.showAddDogForm {
+  padding-bottom: 20px;
 }
 
 .location-form {
-  position: fixed;
-  z-index: 200;
-  line-height: 4em;
-}
-.mapboxgl-ctrl-bottom-left,
-.mapboxgl-ctrl-bottom-right {
-  position: fixed;
+  border: 2px solid black;
+  margin: 20px;
 }
 
-.mapboxgl-ctrl-attrib-inner {
+.location-result-container {
+  border: 2px solid black;
+  margin: 20px;
+}
+
+.review-container {
+  border: 2px solid black;
+  margin: 20px;
+}
+
+.dash-view {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.info-container {
+  overflow: scroll;
+  height: 100vh;
+}
+
+#mobile {
   display: none;
 }
 
-.location-form-container {
-  background-color: #555555;
-  width: 20%;
-  height: 20%;
+#desktop {
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .dash-view {
+    grid-template-columns: 100%;
+  }
+  .mapbox-gl {
+    height: 40vh !important;
+  }
+  #desktop {
+    display: none;
+  }
+  #mobile {
+    display: block;
+  }
 }

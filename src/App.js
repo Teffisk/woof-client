@@ -77,16 +77,8 @@ class App extends Component {
                 component={() => <Home user={this.state.user} />}
               />
               <Route
-                path="/people"
-                component={() => <People user={this.state.user} />}
-              />
-              <Route
                 path="/places"
                 component={() => <Places user={this.state.user} />}
-              />
-              <Route
-                path="/dogs"
-                component={() => <Dogs user={this.state.user} />}
               />
               <Route
                 path="/profile"
