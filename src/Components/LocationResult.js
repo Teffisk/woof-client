@@ -21,6 +21,7 @@ class LocationResult extends Component {
           <br />
           {this.props.location.display_phone}
         </p>
+        <button onClick={this.props.handleShowReviewForm}>Add a Review</button>
       </div>
     );
   }

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import Maps from "./Maps";
-import SERVER_URL from "../constants/server";
-import mapboxgl from "mapbox-gl";
-import LocationSearchForm from "./LocationSearchForm";
 import LocationInfo from "./LocationInfo";
 
 class Places extends Component {
@@ -35,6 +32,7 @@ class Places extends Component {
             handleOnSubmit={this.handleOnSubmit}
             searchLocation={this.state.searchLocation}
             grabLocation={this.grabLocation}
+            user={this.props.user}
           />
         </div>
         <div className="map-container">
@@ -52,6 +50,7 @@ class Places extends Component {
             handleOnSubmit={this.handleOnSubmit}
             searchLocation={this.state.searchLocation}
             grabLocation={this.grabLocation}
+            user={this.props.user}
           />
         </div>
       </div>
