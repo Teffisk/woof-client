@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
+import pin from "../img/pin.png";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGVmZmlzayIsImEiOiJjanFta3hiZ2EwYmx1M3dubzdwenJzcHM5In0.2OK5yrhkJMVUtceL4O7y5g";
@@ -19,6 +20,44 @@ class Maps extends Component {
     this.setState({
       screenWidth: window.innerWidth
     });
+  };
+
+  placeMarker = () => {
+    // myMap.on("load", function() {
+    //   myMap.loadImage(pin, function(error, image) {
+    //     if (error) throw error;
+    //     myMap.addImage("marker", image);
+    //     myMap.addLayer({
+    //       id: "points",
+    //       type: "symbol",
+    //       source: {
+    //         type: "geojson",
+    //         data: {
+    //           type: "FeatureCollection",
+    //           features: [
+    //             {
+    //               type: "Feature",
+    //               geometry: {
+    //                 type: "Point",
+    //                 coordinates: [
+    //                   this.props.location.lng,
+    //                   this.props.location.lat
+    //                 ]
+    //               }
+    //             }
+    //           ]
+    //         }
+    //       },
+    //       layout: {
+    //         "icon-image": "marker",
+    //         "icon-size": 0.5
+    //       }
+    //     });
+    //   });
+    // });
+    // new mapboxgl.Marker()
+    //   .setLngLat([this.props.location.lng, this.props.location.lat])
+    //   .addTo(myMap);
   };
 
   componentDidMount() {
@@ -43,6 +82,8 @@ class Maps extends Component {
         ],
         zoom: 15
       });
+      console.log("Trying to place a pin!!!");
+      //myMap.placeMarker();
     }
   };
 

@@ -34,8 +34,8 @@ class NewReviewForm extends Component {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         this.props.updateReviews(json);
+        this.props.getReviews();
       })
       .catch(err => {
         console.log("Error posting data!", err);

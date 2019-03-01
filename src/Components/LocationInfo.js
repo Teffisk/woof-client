@@ -15,6 +15,13 @@ class LocationInfo extends Component {
     };
   }
 
+  componentDidMount = () => {
+    this.setState({ reviews: [] });
+    if (this.props.location.name) {
+      this.getReviews();
+    }
+  };
+
   updateReviews = input => {
     console.log("updateReviews triggered!!!!", input);
     this.setState({ reviews: input.reviews });
@@ -43,7 +50,7 @@ class LocationInfo extends Component {
   };
 
   render() {
-    const reviews = this.state.reviews.length
+    const reviews = this.state.reviews
       ? this.state.reviews.map(r => {
           return <Review review={r} location={this.props.location} />;
         })
@@ -53,11 +60,22 @@ class LocationInfo extends Component {
       reviews
     ) : (
       <NewReviewForm
-        location={this.state.location}
+        location={this.props.location}
         user={this.props.user}
         updateReviews={this.updateReviews}
         handleShowReviewForm={this.handleShowReviewForm}
+        getReviews={this.getReviews}
       />
+    );
+
+    const showLocation = this.props.location.name ? (
+      <LocationResult
+        location={this.props.location}
+        user={this.props.user}
+        handleShowReviewForm={this.handleShowReviewForm}
+      />
+    ) : (
+      <span>Search a location</span>
     );
 
     return (
@@ -71,11 +89,7 @@ class LocationInfo extends Component {
           getReviews={this.getReviews}
           updateReviews={this.updateReviews}
         />
-        <LocationResult
-          location={this.props.location}
-          user={this.props.user}
-          handleShowReviewForm={this.handleShowReviewForm}
-        />
+        {showLocation}
         {showReviews}
       </div>
     );
