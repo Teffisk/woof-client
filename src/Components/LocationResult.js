@@ -14,7 +14,10 @@ class LocationResult extends Component {
       <div className="location-result-container">
         <h1>{this.props.location.name}</h1>
         {getCategories()}
-        <h4>Yelp Rating: {this.props.location.rating}</h4>
+        <h4>
+          Yelp Rating: {this.props.location.rating} (
+          {this.props.location.review_count})
+        </h4>
         <h4>Dog Friendliness Rating: *****</h4>
         <h4>#dogfriendly #onleash #waterbowl</h4>
         <p>

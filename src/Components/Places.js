@@ -13,8 +13,8 @@ class Places extends Component {
     };
   }
 
-  grabLocation = yelpObj => {
-    this.setState({ location: yelpObj });
+  updateLocation = input => {
+    this.setState({ location: input });
   };
 
   handleZoom = zoom => {
@@ -31,7 +31,7 @@ class Places extends Component {
             location={this.state.location}
             handleOnSubmit={this.handleOnSubmit}
             searchLocation={this.state.searchLocation}
-            grabLocation={this.grabLocation}
+            updateLocation={this.updateLocation}
             user={this.props.user}
           />
         </div>
@@ -49,7 +49,7 @@ class Places extends Component {
             location={this.state.location}
             handleOnSubmit={this.handleOnSubmit}
             searchLocation={this.state.searchLocation}
-            grabLocation={this.grabLocation}
+            updateLocation={this.updateLocation}
             user={this.props.user}
           />
         </div>

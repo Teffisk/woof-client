@@ -27,7 +27,8 @@ class Home extends Component {
         return response.json();
       })
       .then(json => {
-        this.props.grabLocation(json);
+        this.props.updateLocation(json);
+        this.props.getReviews();
       });
   };
 

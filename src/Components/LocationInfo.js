@@ -15,7 +15,13 @@ class LocationInfo extends Component {
     };
   }
 
+  updateReviews = input => {
+    console.log("updateReviews triggered!!!!", input);
+    this.setState({ reviews: input.reviews });
+  };
+
   getReviews = () => {
+    console.log("getReviews fetch triggered!!!!", this.props.location.id);
     fetch(SERVER_URL + "/reviews/locations/" + this.props.location.id, {
       method: "GET",
       headers: {
@@ -24,8 +30,8 @@ class LocationInfo extends Component {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
-        this.setState({ reviews: json });
+        console.log("Review state being updated!", json);
+        this.updateReviews(json);
       })
       .catch(err => {
         console.log("Error in the getReviews call!!!", err);
@@ -37,14 +43,21 @@ class LocationInfo extends Component {
   };
 
   render() {
-    const reviews = this.state.reviews.map(r => {
-      return <Review review={r} location={this.state.location} />;
-    });
+    const reviews = this.state.reviews.length
+      ? this.state.reviews.map(r => {
+          return <Review review={r} location={this.props.location} />;
+        })
+      : [];
 
     const showReviews = this.state.showReviews ? (
       reviews
     ) : (
-      <NewReviewForm location={this.state.location} user={this.props.user} />
+      <NewReviewForm
+        location={this.state.location}
+        user={this.props.user}
+        updateReviews={this.updateReviews}
+        handleShowReviewForm={this.handleShowReviewForm}
+      />
     );
 
     return (
@@ -52,8 +65,11 @@ class LocationInfo extends Component {
         <LocationSearchForm
           handleOnSubmit={this.props.handleOnSubmit}
           searchLocation={this.props.searchLocation}
-          grabLocation={this.props.grabLocation}
+          updateLocation={this.props.updateLocation}
           user={this.props.user}
+          handleShowReviewForm={this.handleShowReviewForm}
+          getReviews={this.getReviews}
+          updateReviews={this.updateReviews}
         />
         <LocationResult
           location={this.props.location}

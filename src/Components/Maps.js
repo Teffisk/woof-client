@@ -7,11 +7,11 @@ mapboxgl.accessToken =
 var myMap;
 
 class Maps extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       screenWidth: window.innerWidth,
-      newLocation: []
+      location: props.location
     };
   }
 
@@ -30,14 +30,7 @@ class Maps extends Component {
       center: [this.props.lng, this.props.lat],
       zoom: this.props.zoom
     });
-    // setTimeout(function() {
-    //   myMap.flyTo({
-    //     center: [
-    //       -74.5 + (Math.random() - 0.5) * 10,
-    //       40 + (Math.random() - 0.5) * 10
-    //     ]
-    //   });
-    // }, 1000);
+
     myMap.resize();
   }
 

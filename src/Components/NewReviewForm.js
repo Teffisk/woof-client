@@ -16,6 +16,32 @@ class NewReviewForm extends Component {
     };
   }
 
+  handleSubmit = e => {
+    console.log("Submitting new review form!!!!");
+    e.preventDefault();
+    this.props.handleShowReviewForm();
+    this.postNewReview();
+  };
+
+  postNewReview = () => {
+    console.log("Hitting postNewReview fetch call!!!!");
+    fetch(SERVER_URL + "/reviews/new", {
+      method: "POST",
+      body: JSON.stringify(this.state), // data to send to server
+      headers: {
+        "Content-Type": "application/json" // let the server know what's coming
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+        this.props.updateReviews(json);
+      })
+      .catch(err => {
+        console.log("Error posting data!", err);
+      });
+  };
+
   storeInput = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -29,7 +55,14 @@ class NewReviewForm extends Component {
 
   removeTag = e => {
     e.preventDefault();
-    selectedTags.pop(selectedTags.indexOf(e.target.value));
+    console.log("selectedTags:", selectedTags);
+    console.log(
+      "Removing:",
+      e.target.value,
+      "Index is:",
+      selectedTags.indexOf(e.target.value)
+    );
+    selectedTags.splice(selectedTags.indexOf(e.target.value), 1);
     this.setState({ tags: selectedTags });
   };
 
@@ -42,7 +75,8 @@ class NewReviewForm extends Component {
       "#dogfriendlystaff",
       "#treats",
       "#dogsinside",
-      "#nodogsallowed"
+      "#nodogsallowed",
+      "#dogfriendlypatio"
     ];
 
     const tags = tagsList.map(t => {
@@ -52,14 +86,17 @@ class NewReviewForm extends Component {
     const showTags = selectedTags.map(t => {
       return (
         <div className="display-tag">
-          {t} <button onClick={this.removeTag}>x</button>
+          {t}{" "}
+          <button value={t} onClick={this.removeTag}>
+            x
+          </button>
         </div>
       );
     });
 
     return (
       <div>
-        <form className="new-review-form">
+        <form className="new-review-form" onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="title">Review Title</label>
             <input type="text" name="title" onChange={this.storeInput} />
@@ -71,7 +108,7 @@ class NewReviewForm extends Component {
               name="dogFriendlinessRating"
               onChange={this.storeInput}
             >
-              <option disabled="disabled" type="default">
+              <option disabled="disabled" selected="selected">
                 1-5
               </option>
               <option value="1">1</option>
@@ -84,13 +121,25 @@ class NewReviewForm extends Component {
           <div>
             <label htmlFor="tags">Hashtags</label>
             <select type="text" name="tags" onChange={this.handleTags}>
+              <option disabled="disabled" selected="selected">
+                Choose all that apply
+              </option>
               {tags}
             </select>
           </div>
           <div className="tags-container">{showTags}</div>
           <div>
             <label htmlFor="description">Review</label>
-            <textarea name="description" onChange={this.storeInput} />
+            <div>
+              <textarea
+                className="review-body"
+                name="description"
+                onChange={this.storeInput}
+              />
+            </div>
+            <div>
+              <input type="submit" value="Submit" />
+            </div>
           </div>
         </form>
       </div>
