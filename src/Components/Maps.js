@@ -102,7 +102,7 @@ class Maps extends Component {
 
     return (
       <div>
-        <div style={style} ref={el => (this.mapContainer = el)} />;
+        <div style={style} ref={el => (this.mapContainer = el)} />
       </div>
     );
   }

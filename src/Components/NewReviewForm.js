@@ -97,9 +97,15 @@ class NewReviewForm extends Component {
     return (
       <div>
         <form className="new-review-form" onSubmit={this.handleSubmit}>
+          <div className="review-header">Write A New Review</div>
           <div>
             <label htmlFor="title">Review Title</label>
-            <input type="text" name="title" onChange={this.storeInput} />
+            <input
+              className="new-review-title"
+              type="text"
+              name="title"
+              onChange={this.storeInput}
+            />
           </div>
           <div>
             <label htmlFor="dogFriendliessRating">Dog Friendliness Score</label>
@@ -138,7 +144,11 @@ class NewReviewForm extends Component {
               />
             </div>
             <div>
-              <input type="submit" value="Submit" />
+              <input
+                className="new-review-submit"
+                type="submit"
+                value="Submit"
+              />
             </div>
           </div>
         </form>

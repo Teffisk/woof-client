@@ -73,9 +73,11 @@ class LocationInfo extends Component {
         location={this.props.location}
         user={this.props.user}
         handleShowReviewForm={this.handleShowReviewForm}
+        reviews={this.state.reviews}
+        updateReviews={this.updateReviews}
       />
     ) : (
-      <span>Search a location</span>
+      <span className="placeholder-text">Search a location</span>
     );
 
     return (

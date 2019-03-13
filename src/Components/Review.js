@@ -27,9 +27,9 @@ class Review extends Component {
         <h3>Dog Friendliness Rating: {paws}</h3>
         <h5>{hashtags}</h5>
         <p>{this.props.review.description}</p>
-        <div>
+        {/* <div>
           <h3>Div containing any images</h3>
-        </div>
+        </div> */}
       </div>
     );
   }

@@ -13,6 +13,7 @@ class Home extends Component {
     console.log("Hitting handleOnSubmit!");
     e.preventDefault();
     this.getSearchedLocation();
+    this.props.updateReviews([]);
   };
 
   onChangeLocation = e => {
@@ -24,11 +25,16 @@ class Home extends Component {
     console.log("Hitting getSearchedLocation fetch call");
     fetch(SERVER_URL + "/places/search/" + this.state.searchLocation)
       .then(response => {
-        return response.json();
+        if (response) {
+          return response.json();
+        }
       })
       .then(json => {
         this.props.updateLocation(json);
         this.props.getReviews();
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 
@@ -41,11 +47,12 @@ class Home extends Component {
         >
           <label htmlFor="searchLocation">Location</label>
           <input
+            className="search-textbox"
             type="text"
             name="searchLocation"
             onChange={this.onChangeLocation}
           />
-          <input type="submit" value="search" />
+          <input className="search-button" type="submit" value="search" />
         </form>
       </div>
     );
