@@ -25,16 +25,13 @@ class Nav extends Component {
       links = (
         <span>
           <Link to="/">Home</Link>
+          <Link to="/places">Find Places</Link>
           <Link to="/login">Log in</Link>
           <Link to="/signup">Sign up</Link>
         </span>
       );
     }
-    return (
-      <div className="anotherWholeGrid">
-        <nav className="nav">{links}</nav>
-      </div>
-    );
+    return <nav className="nav">{links}</nav>;
   }
 }
 

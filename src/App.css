@@ -21,9 +21,10 @@ nav a:hover {
 .footer {
   background-color: #555;
   width: 100%;
-  height: 25px;
+  height: 3vh;
   position: fixed;
   bottom: 0;
+  margin-top: 20px;
 }
 
 .footer-text {
@@ -37,13 +38,6 @@ nav a:hover {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
-
-/* .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-} */
 
 .App-title {
   font-size: 1.5em;
@@ -77,9 +71,9 @@ nav a:hover {
 .location-form {
   font-size: 36px;
   text-align: center;
-  border: 2px solid #222;
-  border-radius: 10px;
-  margin: 10px;
+  border-bottom: 2px solid #222;
+  /* border-radius: 10px; */
+  /* margin: 5px; */
   padding: 10px;
 }
 
@@ -104,9 +98,9 @@ nav a:hover {
 
 .location-result-container {
   text-align: center;
-  border: 2px solid #222;
-  border-radius: 10px;
-  margin: 10px;
+  border-bottom: 2px solid #222;
+  /* border-radius: 10px; */
+  padding: 5px;
 }
 
 .location-result-text {
@@ -118,6 +112,7 @@ nav a:hover {
 
 .location-title {
   font-size: 48px;
+  line-height: 0;
 }
 
 .location-img-container {
@@ -138,17 +133,16 @@ nav a:hover {
 
 .search-textbox {
   text-align: center;
-  background-color: #81c57e;
   font-size: 24px;
   height: 2em;
-  border: 2px solid #222;
-  border-radius: 5px;
+  /* border: 2px solid #222;
+  border-radius: 5px; */
 }
 
 .placeholder-text {
   text-align: center;
   font-size: 24px;
-  margin: 20px;
+  padding: 20px;
 }
 
 .add-review-button {
@@ -162,13 +156,31 @@ nav a:hover {
   margin-bottom: 10px;
 }
 
+.review-login-button {
+  text-decoration: none;
+  font-size: 24px;
+  color: #222;
+  background-color: #25891c;
+  font-family: "Titillium Web", sans-serif;
+  width: 300px;
+  height: 2em;
+  border: 0px solid #25891c;
+  border-radius: 10px;
+  padding: 0 5px;
+  margin-bottom: 10px;
+}
+
 .add-review-button:hover {
   background-color: #81c57e;
 }
 
+.add-review-button:visited {
+  background-color: #25891c !important;
+}
+
 .new-review-form {
-  border: 2px solid #222;
-  border-radius: 5px;
+  /* border: 2px solid #222;
+  border-radius: 5px; */
 }
 
 .new-review-form label {
@@ -195,9 +207,9 @@ nav a:hover {
 }
 
 .review-container {
-  border: 2px solid #222;
-  border-radius: 5px;
-  margin: 10px;
+  /* border: 2px solid #222;
+  border-radius: 5px; */
+  padding: 10px 5px;
 }
 
 .dash-view {
@@ -207,7 +219,8 @@ nav a:hover {
 
 .info-container {
   overflow: scroll;
-  height: 100vh;
+  height: 97vh;
+  border-right: 2px solid #222;
 }
 
 #mobile {
@@ -242,15 +255,25 @@ nav a:hover {
   width: 200px;
   min-height: 1em;
   max-height: 200px;
-  border: 2px solid #222;
-  border-radius: 5px;
+  /* border: 2px solid #222;
+  border-radius: 5px; */
+}
+
+.delete-tag {
+  height: 1.2rem;
+  line-height: 0;
+  margin-left: 7px;
 }
 
 .review-body {
-  border: 2px solid #222;
-  border-radius: 5px;
+  border: 1px solid #222;
+  border-radius: 2px;
   width: 80%;
   max-height: 300px;
   min-height: 2em;
   margin: 10px;
+}
+
+.homepage-text {
+  text-align: center;
 }

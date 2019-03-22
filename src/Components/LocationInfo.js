@@ -4,6 +4,7 @@ import Review from "./Review";
 import LocationSearchForm from "./LocationSearchForm";
 import SERVER_URL from "../constants/server";
 import NewReviewForm from "./NewReviewForm";
+import Login from "../auth/Login";
 
 class LocationInfo extends Component {
   constructor(props) {
@@ -50,6 +51,17 @@ class LocationInfo extends Component {
   };
 
   render() {
+    // const newReview = this.props.user ? (
+    //   <NewReviewForm
+    //     location={this.props.location}
+    //     user={this.props.user}
+    //     updateReviews={this.updateReviews}
+    //     handleShowReviewForm={this.handleShowReviewForm}
+    //     getReviews={this.getReviews}
+    //   />
+    // ) : (
+    //   <Login user={this.props.user} getUser={this.props.getUser} />
+    // );
     const reviews = this.state.reviews
       ? this.state.reviews.map(r => {
           return <Review review={r} location={this.props.location} />;
@@ -77,7 +89,12 @@ class LocationInfo extends Component {
         updateReviews={this.updateReviews}
       />
     ) : (
-      <span className="placeholder-text">Search a location</span>
+      <div className="placeholder-text">
+        Search for a bar, cafe, or other location in the search bar above. To
+        see locations that have reviews added to them, try searching "The Yard"
+        or "Monkey Grind" to see some user generated reviews. Thanks for
+        checking out my app!
+      </div>
     );
 
     return (

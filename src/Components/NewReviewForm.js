@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SERVER_URL from "../constants/server";
+import { Row, Input, Button } from "react-materialize";
 
 const selectedTags = [];
 
@@ -86,10 +87,15 @@ class NewReviewForm extends Component {
     const showTags = selectedTags.map(t => {
       return (
         <div className="display-tag">
-          {t}{" "}
-          <button value={t} onClick={this.removeTag}>
+          {t}
+          <Button
+            value={t}
+            onClick={this.removeTag}
+            className="delete-tag"
+            waves="light"
+          >
             x
-          </button>
+          </Button>
         </div>
       );
     });
@@ -98,19 +104,21 @@ class NewReviewForm extends Component {
       <div>
         <form className="new-review-form" onSubmit={this.handleSubmit}>
           <div className="review-header">Write A New Review</div>
-          <div>
+          <Row>
             <label htmlFor="title">Review Title</label>
-            <input
+            <Input
+              s={12}
               className="new-review-title"
               type="text"
               name="title"
               onChange={this.storeInput}
             />
-          </div>
-          <div>
-            <label htmlFor="dogFriendliessRating">Dog Friendliness Score</label>
-            <select
-              type="number"
+          </Row>
+          <Row>
+            <Input
+              s={12}
+              type="select"
+              label="Dog Friendliness Score"
               name="dogFriendlinessRating"
               onChange={this.storeInput}
             >
@@ -122,27 +130,34 @@ class NewReviewForm extends Component {
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="tags">Hashtags</label>
-            <select type="text" name="tags" onChange={this.handleTags}>
+            </Input>
+          </Row>
+          <Row>
+            <Input
+              s={12}
+              name="tags"
+              type="select"
+              label="Hashtags"
+              onChange={this.handleTags}
+            >
               <option disabled="disabled" selected="selected">
                 Choose all that apply
               </option>
               {tags}
-            </select>
-          </div>
-          <div className="tags-container">{showTags}</div>
+            </Input>
+          </Row>
+          <div className="tags-container container">{showTags}</div>
           <div>
             <label htmlFor="description">Review</label>
-            <div>
-              <textarea
+            <Row>
+              <Input
+                s={12}
+                type="textarea"
                 className="review-body"
                 name="description"
                 onChange={this.storeInput}
               />
-            </div>
+            </Row>
             <div>
               <input
                 className="new-review-submit"

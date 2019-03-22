@@ -33,6 +33,7 @@ class Places extends Component {
             searchLocation={this.state.searchLocation}
             updateLocation={this.updateLocation}
             user={this.props.user}
+            getUser={this.props.getUser}
           />
         </div>
         <div className="map-container">

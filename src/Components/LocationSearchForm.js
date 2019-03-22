@@ -41,12 +41,10 @@ class Home extends Component {
   render() {
     return (
       <div className="location-form-container">
-        <form
-          className="location-form  z-depth-5"
-          onSubmit={this.handleOnSubmit}
-        >
-          <label htmlFor="searchLocation">Location</label>
+        <form className="location-form" onSubmit={this.handleOnSubmit}>
+          <label htmlFor="searchLocation">Search for a local spot</label>
           <input
+            placeholder="Type the name of a location to see its dog friendliness rating"
             className="search-textbox"
             type="text"
             name="searchLocation"

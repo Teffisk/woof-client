@@ -66,9 +66,7 @@ class App extends Component {
         <Router>
           <div>
             <header className="App-header">
-              <nav>
-                <Nav user={this.state.user} updateUser={this.getUser} />
-              </nav>
+              <Nav user={this.state.user} updateUser={this.getUser} />
             </header>
             <div className="content">
               <Route
@@ -78,7 +76,9 @@ class App extends Component {
               />
               <Route
                 path="/places"
-                component={() => <Places user={this.state.user} />}
+                component={() => (
+                  <Places user={this.state.user} getUser={this.getUser} />
+                )}
               />
               <Route
                 path="/profile"

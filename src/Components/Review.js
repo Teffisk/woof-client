@@ -20,12 +20,15 @@ class Review extends Component {
       return <img src={paw} key={p} />;
     });
 
+    let convertedDate = new Date(this.props.review.createdAt);
+
     return (
       <div className="review-container">
-        <h2>Review Title for {this.props.location.name}</h2>
-        <h5>By: {this.props.review.user.username}</h5>
-        <h3>Dog Friendliness Rating: {paws}</h3>
-        <h5>{hashtags}</h5>
+        <h2>{this.props.review.title}</h2>
+        <p>{convertedDate.toDateString()}</p>
+        <h6>By: {this.props.review.user.username}</h6>
+        <h6>Dog Friendliness Rating: {paws}</h6>
+        <h6>{hashtags}</h6>
         <p>{this.props.review.description}</p>
         {/* <div>
           <h3>Div containing any images</h3>

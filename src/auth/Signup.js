@@ -47,7 +47,7 @@ class Signup extends Component {
       return <Redirect to="/profile" />;
     }
     return (
-      <div>
+      <div className="container">
         <h2>Signup as a new user</h2>
         <form onSubmit={this.handleSubmit}>
           <div>
