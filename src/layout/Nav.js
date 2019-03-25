@@ -15,16 +15,17 @@ class Nav extends Component {
     if (this.props.user) {
       links = (
         <span>
-          <Link to="/">Home</Link>
+          {/* <Link to="/">Home</Link> */}
           <Link to="/places">Find Places</Link>
           <Link to="/profile">Profile</Link>
           <a onClick={this.handleLogout}>Logout</a>
+          <span className="nav-name">{this.props.user.username}</span>
         </span>
       );
     } else {
       links = (
         <span>
-          <Link to="/">Home</Link>
+          {/* <Link to="/">Home</Link> */}
           <Link to="/places">Find Places</Link>
           <Link to="/login">Log in</Link>
           <Link to="/signup">Sign up</Link>

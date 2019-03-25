@@ -18,6 +18,12 @@ nav a:hover {
   color: #fff;
 }
 
+.nav-name {
+  /* margin-right: 50px; */
+  text-align: left !important;
+  font-size: 20px;
+}
+
 .footer {
   background-color: #555;
   width: 100%;

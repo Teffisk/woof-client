@@ -72,7 +72,9 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                component={() => <Home user={this.state.user} />}
+                component={() => (
+                  <Places user={this.state.user} getUser={this.getUser} />
+                )}
               />
               <Route
                 path="/places"
@@ -80,10 +82,10 @@ class App extends Component {
                   <Places user={this.state.user} getUser={this.getUser} />
                 )}
               />
-              <Route
+              {/* <Route
                 path="/profile"
                 component={() => <Profile user={this.state.user} />}
-              />
+              /> */}
               <Route
                 path="/login"
                 component={() => (

@@ -39,7 +39,7 @@ class Login extends Component {
 
   render() {
     if (this.props.user) {
-      return <Redirect to="/profile" />;
+      return <Redirect to="/" />;
     }
     return (
       <div className="container">
