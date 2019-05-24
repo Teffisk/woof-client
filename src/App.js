@@ -5,11 +5,7 @@ import SERVER_URL from "./constants/server";
 import "./App.css";
 import Footer from "./layout/Footer";
 import Nav from "./layout/Nav";
-import Home from "./Components/Home";
-import People from "./Components/People";
-import Dogs from "./Components/Dogs";
 import Places from "./Components/Places";
-import Profile from "./Components/Profile";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 
